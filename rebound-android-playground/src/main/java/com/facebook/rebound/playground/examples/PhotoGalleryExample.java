@@ -21,7 +21,6 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.facebook.rebound.SimpleSpringListener;
 import com.facebook.rebound.Spring;
 import com.facebook.rebound.SpringChain;
 import com.facebook.rebound.SpringConfig;
@@ -141,7 +140,8 @@ public class PhotoGalleryExample extends FrameLayout implements SpringListener {
 
     // Determine the size for each image given the screen dimensions.
     Resources res = getResources();
-    mPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3, res.getDisplayMetrics());
+    mPadding = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 3,
+        res.getDisplayMetrics());
     int colWidth = (int) Math.ceil((width - 2 * mPadding) / COLS) - 2 * mPadding;
     int rowHeight = (int) Math.ceil((height - 2 * mPadding) / ROWS) - 2 * mPadding;
 
@@ -163,18 +163,23 @@ public class PhotoGalleryExample extends FrameLayout implements SpringListener {
     }
   }
 
-  @Override public void onSpringUpdate(Spring spring) {
+  @Override
+  public void onSpringUpdate(Spring spring) {
     render();
   }
 
-  @Override public void onSpringAtRest(Spring spring) { }
+  @Override
+  public void onSpringAtRest(Spring spring) { }
 
-  @Override public void onSpringActivate(Spring spring) { }
+  @Override
+  public void onSpringActivate(Spring spring) { }
 
-  @Override public void onSpringEndStateChange(Spring spring) { }
+  @Override
+  public void onSpringEndStateChange(Spring spring) { }
 
   private View.OnClickListener onImageClick = new OnClickListener() {
-    @Override public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
       Object tag = v.getTag();
       if(tag instanceof Integer) {
         mImageViews.get((Integer) tag).bringToFront();

@@ -19,8 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
 import com.facebook.rebound.BaseSpringSystem;
 import com.facebook.rebound.SimpleSpringListener;
 import com.facebook.rebound.Spring;
@@ -42,21 +40,22 @@ public class MainActivity extends Activity {
 
   private Spring mScaleSpring;
 
-  @Bind(R.id.root_view) FrameLayout mRootView;
-  @Bind(R.id.image_view) View mImageView;
+  private View mImageView;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.main);
-    ButterKnife.bind(this);
+    mImageView = findViewById(R.id.image_view);
+    FrameLayout mRootView = (FrameLayout) findViewById(R.id.root_view);
     mRootView.setOnTouchListener(onTouchListener);
   }
 
   /**
    * Add a listener to the spring when the Activity resumes.
    */
-  @Override public void onResume() {
+  @Override
+  public void onResume() {
     super.onResume();
     scaleSpring().addListener(mSpringListener);
   }
@@ -64,7 +63,8 @@ public class MainActivity extends Activity {
   /**
    * Remove the listener to the spring when the Activity pauses.
    */
-  @Override public void onPause() {
+  @Override
+  public void onPause() {
     scaleSpring().removeListener(mSpringListener);
     super.onPause();
   }
@@ -90,7 +90,8 @@ public class MainActivity extends Activity {
    * your view properties in a backwards compatible manner.
    */
   private class ExampleSpringListener extends SimpleSpringListener {
-    @Override public void onSpringUpdate(Spring spring) {
+    @Override
+    public void onSpringUpdate(Spring spring) {
       float mappedValue = (float) SpringUtil.mapValueFromRangeToRange(spring.getCurrentValue(), 0, 1, 1, 0.5);
       ViewCompat.setScaleX(mImageView, mappedValue);
       ViewCompat.setScaleY(mImageView, mappedValue);
@@ -106,7 +107,8 @@ public class MainActivity extends Activity {
    * When released start solving the spring to 0.
    */
   private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
-    @Override public boolean onTouch(View v, MotionEvent event) {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
       switch (event.getAction()) {
         case MotionEvent.ACTION_DOWN:
           scaleSpring().setEndValue(1);

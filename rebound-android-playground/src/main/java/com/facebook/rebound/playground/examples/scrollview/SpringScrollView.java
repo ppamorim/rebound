@@ -133,19 +133,23 @@ public class SpringScrollView extends FrameLayout {
     // a.recycle();
   }
 
-  @Override public int getOverScrollMode() {
+  @Override
+  public int getOverScrollMode() {
     return OVER_SCROLL_ALWAYS;
   }
 
-  @Override public boolean shouldDelayChildPressedState() {
+  @Override
+  public boolean shouldDelayChildPressedState() {
     return true;
   }
 
-  @Override protected float getTopFadingEdgeStrength() {
+  @Override
+  protected float getTopFadingEdgeStrength() {
     return 0;
   }
 
-  @Override protected float getBottomFadingEdgeStrength() {
+  @Override
+  protected float getBottomFadingEdgeStrength() {
     return 0;
   }
 
@@ -171,7 +175,8 @@ public class SpringScrollView extends FrameLayout {
     mOverflingDistance = configuration.getScaledOverflingDistance();
   }
 
-  @Override public void addView(View child) {
+  @Override
+  public void addView(View child) {
     if (getChildCount() > 0) {
       throw new IllegalStateException("ScrollView can host only one direct child");
     }
@@ -179,7 +184,8 @@ public class SpringScrollView extends FrameLayout {
     super.addView(child);
   }
 
-  @Override public void addView(View child, int index) {
+  @Override
+  public void addView(View child, int index) {
     if (getChildCount() > 0) {
       throw new IllegalStateException("ScrollView can host only one direct child");
     }
@@ -187,7 +193,8 @@ public class SpringScrollView extends FrameLayout {
     super.addView(child, index);
   }
 
-  @Override public void addView(View child, ViewGroup.LayoutParams params) {
+  @Override
+  public void addView(View child, ViewGroup.LayoutParams params) {
     if (getChildCount() > 0) {
       throw new IllegalStateException("ScrollView can host only one direct child");
     }
@@ -195,7 +202,8 @@ public class SpringScrollView extends FrameLayout {
     super.addView(child, params);
   }
 
-  @Override  public void addView(View child, int index, ViewGroup.LayoutParams params) {
+  @Override
+  public void addView(View child, int index, ViewGroup.LayoutParams params) {
     if (getChildCount() > 0) {
       throw new IllegalStateException("ScrollView can host only one direct child");
     }
@@ -257,7 +265,8 @@ public class SpringScrollView extends FrameLayout {
     mSmoothScrollingEnabled = smoothScrollingEnabled;
   }
 
-  @Override protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+  @Override
+  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
     super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
     if (!mFillViewport) {
@@ -287,7 +296,8 @@ public class SpringScrollView extends FrameLayout {
     }
   }
 
-  @Override public boolean dispatchKeyEvent(KeyEvent event) {
+  @Override
+  public boolean dispatchKeyEvent(KeyEvent event) {
     // Let the focused view and/or our descendants get the key first
     return super.dispatchKeyEvent(event) || executeKeyEvent(event);
   }
@@ -375,7 +385,8 @@ public class SpringScrollView extends FrameLayout {
     }
   }
 
-  @Override public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+  @Override
+  public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
     if (disallowIntercept) {
       recycleVelocityTracker();
     }
@@ -383,7 +394,8 @@ public class SpringScrollView extends FrameLayout {
   }
 
 
-  @Override public boolean onInterceptTouchEvent(MotionEvent ev) {
+  @Override
+  public boolean onInterceptTouchEvent(MotionEvent ev) {
         /*
          * This method JUST determines whether we want to intercept the motion.
          * If we return true, onMotionEvent will be called and we do the actual
@@ -494,7 +506,8 @@ public class SpringScrollView extends FrameLayout {
     return mIsBeingDragged;
   }
 
-  @Override public boolean onTouchEvent(MotionEvent ev) {
+  @Override
+  public boolean onTouchEvent(MotionEvent ev) {
     initVelocityTrackerIfNotExists();
     mVelocityTracker.addMovement(ev);
 
@@ -656,7 +669,8 @@ public class SpringScrollView extends FrameLayout {
 //    return super.onGenericMotionEvent(event);
 //  }
 
-  @Override protected void onOverScrolled(int scrollX, int scrollY,
+  @Override
+  protected void onOverScrolled(int scrollX, int scrollY,
                                 boolean clampedX, boolean clampedY) {
     // Treat animating scrolls differently; see #computeScroll() for why.
     if (!mScroller.isFinished()) {
@@ -683,7 +697,8 @@ public class SpringScrollView extends FrameLayout {
     }
   }
 
-  @Override public boolean performAccessibilityAction(int action, Bundle arguments) {
+  @Override
+  public boolean performAccessibilityAction(int action, Bundle arguments) {
     if (super.performAccessibilityAction(action, arguments)) {
       return true;
     }
@@ -711,7 +726,8 @@ public class SpringScrollView extends FrameLayout {
     return false;
   }
 
-  @Override public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
+  @Override
+  public void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo info) {
     super.onInitializeAccessibilityNodeInfo(info);
     info.setClassName(SpringScrollView.class.getName());
     if (isEnabled()) {
@@ -728,7 +744,8 @@ public class SpringScrollView extends FrameLayout {
     }
   }
 
-  @Override public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
+  @Override
+  public void onInitializeAccessibilityEvent(AccessibilityEvent event) {
     super.onInitializeAccessibilityEvent(event);
     event.setClassName(SpringScrollView.class.getName());
     final boolean scrollable = getScrollRange() > 0;
@@ -1074,7 +1091,8 @@ public class SpringScrollView extends FrameLayout {
    * <p>The scroll range of a scroll view is the overall height of all of its
    * children.</p>
    */
-  @Override protected int computeVerticalScrollRange() {
+  @Override
+  protected int computeVerticalScrollRange() {
     final int count = getChildCount();
     final int contentHeight = getHeight() - getPaddingBottom() - getPaddingTop();
     if (count == 0) {
@@ -1093,11 +1111,13 @@ public class SpringScrollView extends FrameLayout {
     return scrollRange;
   }
 
-  @Override protected int computeVerticalScrollOffset() {
+  @Override
+  protected int computeVerticalScrollOffset() {
     return Math.max(0, super.computeVerticalScrollOffset());
   }
 
-  @Override protected void measureChild(View child, int parentWidthMeasureSpec, int parentHeightMeasureSpec) {
+  @Override
+  protected void measureChild(View child, int parentWidthMeasureSpec, int parentHeightMeasureSpec) {
     ViewGroup.LayoutParams lp = child.getLayoutParams();
 
     int childWidthMeasureSpec;
@@ -1111,7 +1131,8 @@ public class SpringScrollView extends FrameLayout {
     child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
   }
 
-  @Override protected void measureChildWithMargins(View child, int parentWidthMeasureSpec, int widthUsed,
+  @Override
+  protected void measureChildWithMargins(View child, int parentWidthMeasureSpec, int widthUsed,
                                          int parentHeightMeasureSpec, int heightUsed) {
     final MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
 
@@ -1124,7 +1145,8 @@ public class SpringScrollView extends FrameLayout {
     child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
   }
 
-  @Override public void computeScroll() {
+  @Override
+  public void computeScroll() {
     if (mScroller.computeScrollOffset()) {
       // This is called at drawing time by ViewGroup.  We don't want to
       // re-show the scrollbars at this point, which scrollTo will do,
@@ -1270,7 +1292,8 @@ public class SpringScrollView extends FrameLayout {
     return scrollYDelta;
   }
 
-  @Override public void requestChildFocus(View child, View focused) {
+  @Override
+  public void requestChildFocus(View child, View focused) {
     if (!mIsLayoutDirty) {
       scrollToChild(focused);
     } else {
@@ -1288,7 +1311,8 @@ public class SpringScrollView extends FrameLayout {
    * This is more expensive than the default {@link android.view.ViewGroup}
    * implementation, otherwise this behavior might have been made the default.
    */
-  @Override protected boolean onRequestFocusInDescendants(int direction,
+  @Override
+  protected boolean onRequestFocusInDescendants(int direction,
                                                 Rect previouslyFocusedRect) {
 
     // convert from forward / backward notation to up / down / left / right
@@ -1315,7 +1339,8 @@ public class SpringScrollView extends FrameLayout {
     return nextFocus.requestFocus(direction, previouslyFocusedRect);
   }
 
-  @Override public boolean requestChildRectangleOnScreen(View child, Rect rectangle,
+  @Override
+  public boolean requestChildRectangleOnScreen(View child, Rect rectangle,
                                                boolean immediate) {
     // offset into coordinate space of this scroll view
     rectangle.offset(child.getLeft() - child.getScrollX(),
@@ -1324,16 +1349,19 @@ public class SpringScrollView extends FrameLayout {
     return scrollToChildRect(rectangle, immediate);
   }
 
-  @Override public void requestLayout() {
+  @Override
+  public void requestLayout() {
     mIsLayoutDirty = true;
     super.requestLayout();
   }
 
-  @Override protected void onDetachedFromWindow() {
+  @Override
+  protected void onDetachedFromWindow() {
     super.onDetachedFromWindow();
   }
 
-  @Override protected void onLayout(boolean changed, int l, int t, int r, int b) {
+  @Override
+  protected void onLayout(boolean changed, int l, int t, int r, int b) {
     super.onLayout(changed, l, t, r, b);
     mIsLayoutDirty = false;
     // Give a child focus if it needs it
@@ -1364,7 +1392,8 @@ public class SpringScrollView extends FrameLayout {
     scrollTo(getScrollX(), getScrollY());
   }
 
-  @Override protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+  @Override
+  protected void onSizeChanged(int w, int h, int oldw, int oldh) {
     super.onSizeChanged(w, h, oldw, oldh);
 
     View currentFocused = findFocus();
@@ -1423,7 +1452,8 @@ public class SpringScrollView extends FrameLayout {
    *
    * <p>This version also clamps the scrolling to the bounds of our child.
    */
-  @Override public void scrollTo(int x, int y) {
+  @Override
+  public void scrollTo(int x, int y) {
     // we rely on the fact the View.scrollBy calls scrollTo.
     if (getChildCount() > 0) {
       if (x != getScrollX() || y != getScrollY()) {
@@ -1432,13 +1462,16 @@ public class SpringScrollView extends FrameLayout {
     }
   }
 
-  @Override public void setOverScrollMode(int mode) { }
+  @Override
+  public void setOverScrollMode(int mode) { }
 
-  @Override public void draw(Canvas canvas) {
+  @Override
+  public void draw(Canvas canvas) {
     super.draw(canvas);
   }
 
-  @Override protected void onRestoreInstanceState(Parcelable state) {
+  @Override
+  protected void onRestoreInstanceState(Parcelable state) {
     if (getContext().getApplicationInfo().targetSdkVersion <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       // Some old apps reused IDs in ways they shouldn't have.
       // Don't break them, but they don't get scroll state restoration.
@@ -1451,7 +1484,8 @@ public class SpringScrollView extends FrameLayout {
     requestLayout();
   }
 
-  @Override protected Parcelable onSaveInstanceState() {
+  @Override
+  protected Parcelable onSaveInstanceState() {
     if (getContext().getApplicationInfo().targetSdkVersion <= Build.VERSION_CODES.JELLY_BEAN_MR2) {
       // Some old apps reused IDs in ways they shouldn't have.
       // Don't break them, but they don't get scroll state restoration.
@@ -1475,12 +1509,14 @@ public class SpringScrollView extends FrameLayout {
       scrollPosition = source.readInt();
     }
 
-    @Override public void writeToParcel(Parcel dest, int flags) {
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
       super.writeToParcel(dest, flags);
       dest.writeInt(scrollPosition);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
       return "HorizontalScrollView.SavedState{"
           + Integer.toHexString(System.identityHashCode(this))
           + " scrollPosition=" + scrollPosition + "}";
@@ -1532,19 +1568,19 @@ public class SpringScrollView extends FrameLayout {
 
     boolean clampedX = false;
     if (newScrollX > right) {
-//      newScrollX = right;
+      //newScrollX = right;
       clampedX = true;
     } else if (newScrollX < left) {
-//      newScrollX = left;
+      //newScrollX = left;
       clampedX = true;
     }
 
     boolean clampedY = false;
     if (newScrollY > bottom) {
-//      newScrollY = bottom;
+      //newScrollY = bottom;
       clampedY = true;
     } else if (newScrollY < top) {
-//      newScrollY = top;
+      //newScrollY = top;
       clampedY = true;
     }
 

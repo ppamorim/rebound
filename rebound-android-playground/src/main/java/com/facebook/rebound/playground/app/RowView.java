@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.facebook.rebound.playground.R;
 
 public class RowView extends FrameLayout{
+
   private final TextView mTextView;
   private final TextView mSubTextView;
 
@@ -50,4 +51,5 @@ public class RowView extends FrameLayout{
   public void setSubtext(String text) {
     mSubTextView.setText(text);
   }
+
 }

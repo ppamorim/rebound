@@ -57,14 +57,16 @@ public class SpringChainExample extends FrameLayout {
     initializeViews(context, rootView, new ArgbEvaluator());
   }
 
-  @Override protected void onFinishInflate() {
+  @Override
+  protected void onFinishInflate() {
     super.onFinishInflate();
     List<Spring> springs = mSpringChain.getAllSprings();
     for (int i = 0; i < springs.size(); i++) {
       springs.get(i).setCurrentValue(-mViews.get(i).getWidth());
     }
     postDelayed(new Runnable() {
-      @Override public void run() {
+      @Override
+      public void run() {
         mSpringChain.setControlSpringIndex(0).getControlSpring().setEndValue(0);
       }
     }, 500);
@@ -143,7 +145,8 @@ public class SpringChainExample extends FrameLayout {
   }
 
   private View.OnTouchListener onTouchListener = new OnTouchListener() {
-    @Override public boolean onTouch(View v, MotionEvent event) {
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
       return handleRowTouch(v, event);
     }
   };

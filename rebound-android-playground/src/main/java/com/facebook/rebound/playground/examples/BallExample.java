@@ -87,7 +87,8 @@ public class BallExample extends FrameLayout implements SpringListener, SpringSy
     configTextPaint();
   }
 
-  @Override protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
+  @Override
+  protected void onSizeChanged(int width, int height, int oldWidth, int oldHeight) {
     super.onSizeChanged(width, height, oldWidth, oldHeight);
     centerX = getWidth() / 2f;
     centerY = getHeight() / 2f;
@@ -102,7 +103,8 @@ public class BallExample extends FrameLayout implements SpringListener, SpringSy
     }
   }
 
-  @Override protected void onDraw(Canvas canvas) {
+  @Override
+  protected void onDraw(Canvas canvas) {
     super.onDraw(canvas);
     canvas.drawColor(background);
     i = 0;
@@ -118,7 +120,8 @@ public class BallExample extends FrameLayout implements SpringListener, SpringSy
     canvas.drawText(TEXT, x, y + 10, textPaint);
   }
 
-  @Override public boolean onTouchEvent(MotionEvent event) {
+  @Override
+  public boolean onTouchEvent(MotionEvent event) {
     touchX = event.getRawX();
     touchY = event.getRawY();
     boolean ret = false;
@@ -168,21 +171,27 @@ public class BallExample extends FrameLayout implements SpringListener, SpringSy
     return ret;
   }
 
-  @Override public void onSpringUpdate(Spring spring) {
+  @Override
+  public void onSpringUpdate(Spring spring) {
     x = (float) xSpring.getCurrentValue();
     y = (float) ySpring.getCurrentValue();
     invalidate();
   }
 
-  @Override public void onSpringAtRest(Spring spring) { }
+  @Override
+  public void onSpringAtRest(Spring spring) { }
 
-  @Override public void onSpringActivate(Spring spring) { }
+  @Override
+  public void onSpringActivate(Spring spring) { }
 
-  @Override public void onSpringEndStateChange(Spring spring) { }
+  @Override
+  public void onSpringEndStateChange(Spring spring) { }
 
-  @Override public void onBeforeIntegrate(BaseSpringSystem springSystem) { }
+  @Override
+  public void onBeforeIntegrate(BaseSpringSystem springSystem) { }
 
-  @Override public void onAfterIntegrate(BaseSpringSystem springSystem) {
+  @Override
+  public void onAfterIntegrate(BaseSpringSystem springSystem) {
     checkConstraints();
   }
 

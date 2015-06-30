@@ -157,15 +157,18 @@ public class SpringOverScroller implements SpringListener {
     mSpringY.setAtRest();
   }
 
-  @Override public void onSpringUpdate(Spring spring) {
+  @Override
+  public void onSpringUpdate(Spring spring) {
     Log.d("WSB", "cv:" + spring.getCurrentValue());
   }
 
   @Override
   public void onSpringAtRest(Spring spring) { }
 
-  @Override public void onSpringActivate(Spring spring) { }
+  @Override
+  public void onSpringActivate(Spring spring) { }
 
-  @Override public void onSpringEndStateChange(Spring spring) { }
+  @Override
+  public void onSpringEndStateChange(Spring spring) { }
 
 }

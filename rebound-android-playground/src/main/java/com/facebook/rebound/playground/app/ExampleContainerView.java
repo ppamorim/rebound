@@ -25,6 +25,7 @@ import com.facebook.rebound.SpringSystem;
 import com.facebook.rebound.SpringUtil;
 
 public class ExampleContainerView extends FrameLayout implements SpringListener {
+
   private final SpringSystem mSpringSystem;
   private final Spring mTransitionSpring;
   private Callback mCallback;

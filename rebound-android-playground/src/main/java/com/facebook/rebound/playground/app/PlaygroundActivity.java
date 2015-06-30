@@ -12,12 +12,11 @@
 
 package com.facebook.rebound.playground.app;
 
-import android.app.Activity;
 import android.content.Context;
 import android.database.DataSetObserver;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +25,6 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import butterknife.Bind;
 import com.facebook.rebound.SpringUtil;
 import com.facebook.rebound.playground.R;
 import com.facebook.rebound.playground.examples.BallExample;
@@ -41,7 +39,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaygroundActivity extends AbstractActivity implements AdapterView.OnItemClickListener {
+public class PlaygroundActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
   private static final List<Sample> SAMPLES = new ArrayList<>();
 
@@ -57,30 +55,33 @@ public class PlaygroundActivity extends AbstractActivity implements AdapterView.
   private ExampleContainerView mCurrentExample;
   private boolean mAnimating;
 
-  @Bind(R.id.root_container) View mRootContainer;
-  @Bind(R.id.root) ViewGroup mRootView;
-  @Bind(R.id.list_view) ListView mListView;
+  private View mRootContainer;
+  private ViewGroup mRootView;
 
-  @Override protected int getContentViewId() {
-    return R.layout.activity_playground;
-  }
-
-  @Override protected void onCreate(Bundle savedInstanceState) {
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    mListView.setAdapter(new ExampleListAdapter());
-    mListView.setOnItemClickListener(this);
+    setContentView(R.layout.activity_playground);
+    mRootContainer = findViewById(R.id.root_container);
+    mRootView = (ViewGroup) findViewById(R.id.root);
+    ListView listView = (ListView) findViewById(R.id.list_view);
+    listView.setAdapter(new ExampleListAdapter());
+    listView.setOnItemClickListener(this);
   }
 
-  @Override public boolean onCreateOptionsMenu(Menu menu) {
+  @Override
+  public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.playground, menu);
     return true;
   }
 
-  @Override public boolean onOptionsItemSelected(MenuItem item) {
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
     return item.getItemId() == R.id.action_settings || super.onOptionsItemSelected(item);
   }
 
-  @Override public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+  @Override
+  public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
     if (mAnimating) {
       return;
     }
@@ -129,14 +130,16 @@ public class PlaygroundActivity extends AbstractActivity implements AdapterView.
     mCurrentExample.postDelayed(new Runnable() {
       @Override public void run() {
         mCurrentExample.reveal(true, new ExampleContainerView.Callback() {
-          @Override public void onProgress(double progress) {
+          @Override
+          public void onProgress(double progress) {
             float scale = (float) SpringUtil.mapValueFromRangeToRange(progress, 0, 1, 0.8, 1);
             mRootContainer.setScaleX(scale);
             mRootContainer.setScaleY(scale);
             mRootContainer.setAlpha((float) progress);
           }
 
-          @Override public void onEnd() {
+          @Override
+          public void onEnd() {
             mAnimating = false;
           }
         });
@@ -151,14 +154,16 @@ public class PlaygroundActivity extends AbstractActivity implements AdapterView.
     }
     mAnimating = true;
     mCurrentExample.hide(true, new ExampleContainerView.Callback() {
-      @Override public void onProgress(double progress) {
+      @Override
+      public void onProgress(double progress) {
         float scale = (float) SpringUtil.mapValueFromRangeToRange(progress, 0, 1, 0.8, 1);
         mRootContainer.setScaleX(scale);
         mRootContainer.setScaleY(scale);
         mRootContainer.setAlpha((float) progress);
       }
 
-      @Override public void onEnd() {
+      @Override
+      public void onEnd() {
         mAnimating = false;
         mCurrentExample.clearCallback();
         mRootView.removeView(mCurrentExample);
@@ -171,27 +176,34 @@ public class PlaygroundActivity extends AbstractActivity implements AdapterView.
 
   private class ExampleListAdapter implements ListAdapter {
 
-    @Override public void registerDataSetObserver(DataSetObserver observer) { }
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) { }
 
-    @Override public void unregisterDataSetObserver(DataSetObserver observer) { }
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) { }
 
-    @Override public int getCount() {
+    @Override
+    public int getCount() {
       return SAMPLES.size();
     }
 
-    @Override public Object getItem(int position) {
+    @Override
+    public Object getItem(int position) {
       return SAMPLES.get(position);
     }
 
-    @Override public long getItemId(int position) {
+    @Override
+    public long getItemId(int position) {
       return position;
     }
 
-    @Override public boolean hasStableIds() {
+    @Override
+    public boolean hasStableIds() {
       return true;
     }
 
-    @Override public View getView(int position, View convertView, ViewGroup parent) {
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
       RowView rowView;
       if (convertView != null) {
         rowView = (RowView) convertView;
@@ -203,25 +215,31 @@ public class PlaygroundActivity extends AbstractActivity implements AdapterView.
       return rowView;
     }
 
-    @Override public int getItemViewType(int position) {
+    @Override
+    public int getItemViewType(int position) {
       return 0;
     }
 
-    @Override public int getViewTypeCount() {
+    @Override
+    public int getViewTypeCount() {
       return 1;
     }
 
-    @Override public boolean isEmpty() {
+    @Override
+    public boolean isEmpty() {
       return SAMPLES.isEmpty();
     }
 
-    @Override public boolean areAllItemsEnabled() {
+    @Override
+    public boolean areAllItemsEnabled() {
       return true;
     }
 
-    @Override public boolean isEnabled(int position) {
+    @Override
+    public boolean isEnabled(int position) {
       return true;
     }
+
   }
 
   private static class Sample {
@@ -235,4 +253,5 @@ public class PlaygroundActivity extends AbstractActivity implements AdapterView.
       this.subtext = subtext;
     }
   }
+
 }
