@@ -21,7 +21,8 @@ import com.facebook.rebound.ui.Util;
 public class OrigamiExample extends FrameLayout {
 
   // Create a spring configuration based on Origami values from the Photo Grid example.
-  private static final SpringConfig ORIGAMI_SPRING_CONFIG = SpringConfig.fromOrigamiTensionAndFriction(40, 7);
+  private static final SpringConfig ORIGAMI_SPRING_CONFIG =
+      SpringConfig.fromOrigamiTensionAndFriction(40, 7);
 
   private final Spring mSpring;
   private final View mSelectedPhoto;
@@ -49,7 +50,7 @@ public class OrigamiExample extends FrameLayout {
     root.setOnClickListener(new OnClickListener() {
       @Override
       public void onClick(View v) {
-        handleClick(v);
+        handleClick();
       }
     });
 
@@ -77,8 +78,10 @@ public class OrigamiExample extends FrameLayout {
 
     // Put our config into a registry. This is optional, but it gives you the ability to live tune
     // the spring using the SpringConfiguratorView which will show up at the bottom of the screen.
-    SpringConfigRegistry.getInstance().addSpringConfig(ORIGAMI_SPRING_CONFIG, "origami animation spring");
-    // Tell the SpringConfiguratorView that we've updated the registry to allow you to live tune the animation spring.
+    SpringConfigRegistry.getInstance().addSpringConfig(ORIGAMI_SPRING_CONFIG,
+        "origami animation spring");
+    // Tell the SpringConfiguratorView that we've updated the registry to allow you to live tune
+    // the animation spring.
     mSpringConfiguratorView.refreshSpringConfigurations();
 
     // Uncomment this line to actually show the SpringConfiguratorView allowing you to live tune
@@ -95,7 +98,7 @@ public class OrigamiExample extends FrameLayout {
    * On click we just move the springs end state from 0 to 1. This allows the Spring to act much
    * like an Origami switch.
    */
-  public void handleClick(View view) {
+  public void handleClick() {
     if (mSpring.getEndValue() == 0) {
       mSpring.setEndValue(1);
     } else {
@@ -117,7 +120,8 @@ public class OrigamiExample extends FrameLayout {
     // Get the current spring value.
     double value = mSpring.getCurrentValue();
 
-    // Map the spring to the feedback bar position so that its hidden off screen and bounces in on tap.
+    // Map the spring to the feedback bar position so that its hidden off screen and bounces in
+    // on tap.
     float barPosition =
         (float) SpringUtil.mapValueFromRangeToRange(value, 0, 1, mFeedbackBar.getHeight(), 0);
     mFeedbackBar.setTranslationY(barPosition);
@@ -130,8 +134,10 @@ public class OrigamiExample extends FrameLayout {
     mSelectedPhoto.setScaleY(selectedPhotoScale);
 
     // Map the spring to the selected photo translation from its position in the grid
-    float selectedPhotoTranslateX = (float) SpringUtil.mapValueFromRangeToRange(value, 0, 1, Util.dpToPx(-106.667f, resources), 0);
-    float selectedPhotoTranslateY = (float) SpringUtil.mapValueFromRangeToRange(value, 0, 1, Util.dpToPx(46.667f, resources), 0);
+    float selectedPhotoTranslateX = (float) SpringUtil.mapValueFromRangeToRange(value, 0, 1,
+        Util.dpToPx(-106.667f, resources), 0);
+    float selectedPhotoTranslateY = (float) SpringUtil.mapValueFromRangeToRange(value, 0, 1,
+        Util.dpToPx(46.667f, resources), 0);
     mSelectedPhoto.setTranslationX(selectedPhotoTranslateX);
     mSelectedPhoto.setTranslationY(selectedPhotoTranslateY);
 
@@ -141,7 +147,8 @@ public class OrigamiExample extends FrameLayout {
     mPhotoGrid.setAlpha(gridAlpha);
 
 
-    // Map the spring to the photo grid scale so that it scales down slightly as the selected photo // zooms in.
+    // Map the spring to the photo grid scale so that it scales down slightly as the selected
+    // photo // zooms in.
     float gridScale =
         (float) SpringUtil.mapValueFromRangeToRange(value, 0, 1, 1, 0.95);
     gridScale = Math.max(gridScale, 0); // Clamp the value so we don't go below 0.
