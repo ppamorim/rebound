@@ -29,6 +29,7 @@ import com.facebook.rebound.SpringUtil;
 import com.facebook.rebound.playground.R;
 import com.facebook.rebound.playground.examples.BallExample;
 import com.facebook.rebound.playground.examples.PhotoGalleryExample;
+import com.facebook.rebound.playground.examples.SequencerExample;
 import com.facebook.rebound.playground.examples.SpringChainExample;
 import com.facebook.rebound.playground.examples.OrigamiExample;
 import com.facebook.rebound.playground.examples.SimpleExample;
@@ -50,6 +51,7 @@ public class PlaygroundActivity extends Activity implements AdapterView.OnItemCl
     SAMPLES.add(new Sample(PhotoGalleryExample.class, "Photo Gallery", "Tap on a photo to enlarge or minimize."));
     SAMPLES.add(new Sample(BallExample.class, "Inertia Ball", "Toss the ball around the screen and watch it settle"));
     SAMPLES.add(new Sample(OrigamiExample.class, "Origami Example", "Rebound port of an Origami composition"));
+    SAMPLES.add(new Sample(SequencerExample.class, "Sequencer Example", "Sequence your Springs"));
   }
 
   private ListView mListView;
